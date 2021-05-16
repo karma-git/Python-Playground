@@ -44,7 +44,6 @@ def main():
         log(level=args.level.upper())
     else:
         kv = args.__dict__
-        print(args, args.__dict__)
         command = list(filter(lambda x: True if kv[x] == True and x != 'level' else False, kv))[0]
         log(level=verbose_level[command].upper())
 
