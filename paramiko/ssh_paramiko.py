@@ -1,13 +1,14 @@
 import paramiko
 import os
 from loguru import logger
+from typing import NoReturn
 
 COMMANDS = ["uname -a",
             "uptime -s",
             ]
 
 
-def ssh(hostname: str, commands: list, **kwargs: dict) -> str:
+def ssh(hostname: str, commands: list, **kwargs: dict) -> NoReturn:
     # Create ssh client instance
     client = paramiko.SSHClient()
 
@@ -33,7 +34,7 @@ def ssh(hostname: str, commands: list, **kwargs: dict) -> str:
         client.connect(hostname=hostname, **kwargs)
     except Exception as e:
         logger.info("Hostname=({}), config=({})", hostname, kwargs)
-        logger.error("Error type {}", e)
+        logger.error("Error=({}), description=({})", e.__class__.__name__, e)
     else:
         bs = lambda b: str(b, encoding='utf-8')
         for command in commands:
