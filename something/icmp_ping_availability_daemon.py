@@ -27,7 +27,7 @@ def main(target_ip: str, log_file_name: str):
     failure_counter = []
     while True:
         icmp_ping_return_code = subprocess.run(
-            ["ping", "-c", "1", target_ip], stdout=subprocess.DEVNULL, check=True
+            ["ping", "-c", "1", target_ip], stdout=subprocess.DEVNULL
         ).returncode
         logger.debug("ICMP code -> {}", icmp_ping_return_code)
         # code 0 means what ping command has succeed
